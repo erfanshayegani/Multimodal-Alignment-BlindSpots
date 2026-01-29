@@ -9,10 +9,7 @@
     </p>
 <h2 align="center">🔥 ICLR 2026</h2>
 
-<p align="center">
 $${\color{red}\text{\textbf{Warning: This repo contains harmful content!}}}$$
-</p>
-
 [Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP)
 
 
