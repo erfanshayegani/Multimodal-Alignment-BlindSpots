@@ -35,7 +35,7 @@ We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(
 
 
 <p align="center">
-  <img src="assets/Cross-Role.png" width="60%" alt="Abstract_ICLR2026">
+  <img src="assets/Cross-Role.png" width="40%" alt="Abstract_ICLR2026">
 </p>
 
 
