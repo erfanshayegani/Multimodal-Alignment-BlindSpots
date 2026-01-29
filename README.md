@@ -10,7 +10,7 @@
 <h2 align="center">🔥 ICLR 2026</h2>
 
 <p align="center">
-$${\color{red}\text{\textbf{Warning: This repo has harmful content!}}}$$
+$${\color{red}\text{\textbf{Warning: This repo contains harmful content!}}}$$
 </p>
 
 [Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP)
@@ -197,9 +197,8 @@ python data_gen/generate_data.py generate_hf_data \
 
 
 
-## Citation
+### Citation
 📚🤗 If you find this repository useful in your project, please consider giving a ⭐ and citing:
-
 ```bibtex
 @inproceedings{
     shayegani20242026misaligned,
