@@ -43,7 +43,8 @@ We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(
 
 ### ✨ Updates
 - [2026/01/28] 💻 Stay tuned for the Code and Results.
-- [2026/01/25] 🔥 The paper got accepted at ICLR 2026!
+- [2026/01/25] 🔥 The paper got accepted at **ICLR 2026**!
+- [2025/11/25] 🎉 Accepted at the Responsible Foundation Models Workshop@NeurIPS 2025.
 
 ---
 
