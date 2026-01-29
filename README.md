@@ -1,12 +1,14 @@
-<h1 align="center">Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots</h1>
-    <p align='center' style="text-align:center;font-size:1em;">
-    <a href="https://erfanshayegani.github.io/" target="_blank" style="text-decoration: none;">Erfan Shayegani</a>, 
-    <a href="https://shahariar-shibli.github.io/" target="_blank" style="text-decoration: none;">G M Shahariar</a>, 
-    <a href="https://www.microsoft.com/en-us/research/people/saraabdali/" target="_blank" style="text-decoration: none;">Sara Abdali</a>, 
-    <a href="https://jadeleiyu.github.io/" target="_blank" style="text-decoration: none;">Lei Yu</a>,
-    <a href="https://www.cs.ucr.edu/~nael/" target="_blank" style="text-decoration: none;">Nael Abu-Ghazaleh</a>, 
-    <a href="https://yuedong.us/" target="_blank" style="text-decoration: none;">Yue Dong</a>
-    </p>
+# Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots
+
+<p align='center' style="text-align:center;font-size:1em;">
+<a href="https://erfanshayegani.github.io/" target="_blank" style="text-decoration: none;">Erfan Shayegani</a>, 
+<a href="https://shahariar-shibli.github.io/" target="_blank" style="text-decoration: none;">G M Shahariar</a>, 
+<a href="https://www.microsoft.com/en-us/research/people/saraabdali/" target="_blank" style="text-decoration: none;">Sara Abdali</a>, 
+<a href="https://jadeleiyu.github.io/" target="_blank" style="text-decoration: none;">Lei Yu</a>,
+<a href="https://www.cs.ucr.edu/~nael/" target="_blank" style="text-decoration: none;">Nael Abu-Ghazaleh</a>, 
+<a href="https://yuedong.us/" target="_blank" style="text-decoration: none;">Yue Dong</a>
+</p>
+
 <h2 align="center">🔥 ICLR 2026</h2>
 
 <!-- $${\color{red}\text{\textbf{Warning: This repo contains harmful content!}}}$$
@@ -196,7 +198,7 @@ python data_gen/generate_data.py generate_hf_data \
 📚🤗 If you find this repository useful in your project, please consider giving a ⭐ and citing:
 ```bibtex
 @inproceedings{
-    shayegani20242026misaligned,
+    shayegani2026misaligned,
     title={Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots},
     author={Erfan Shayegani and G M Shahariar and Sara Abdali and Lei Yu and Nael Abu-Ghazaleh and Yue Dong},
     booktitle={The Fourteenth International Conference on Learning Representations},
