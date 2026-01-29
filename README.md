@@ -6,7 +6,7 @@
 <a href="https://jadeleiyu.github.io/" target="_blank" style="text-decoration: none;">Lei Yu</a>,
 <a href="https://www.cs.ucr.edu/~nael/" target="_blank" style="text-decoration: none;">Nael Abu-Ghazaleh</a>, 
 <a href="https://yuedong.us/" target="_blank" style="text-decoration: none;">Yue Dong</a>
-<br>
+<br><br>
   <a href="https://arxiv.org/abs/2504.03735">
     <img src="https://img.shields.io/badge/arXiv-2511.07403-b31b1b.svg" alt="arXiv">
   </a>
