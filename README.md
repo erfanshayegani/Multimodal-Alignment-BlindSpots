@@ -13,24 +13,23 @@
     </p>
 <h2 align="center">🔥 ICLR 2026</h2>
 
+<p align="center">
 $${\color{red}\text{\textbf{Warning: This repo has harmful content!}}}$$
 [Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP)
-<div align="center">
-<img width="100%" alt="JBPieces" src="images/JBPieces_logo.png">
-</div>
+</p>
+
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2511.07403">
+  <a href="https://arxiv.org/abs/2504.03735">
     <img src="https://img.shields.io/badge/arXiv-2511.07403-b31b1b.svg" alt="arXiv">
   </a>
-  <!-- <a href="https://pixl.cs.ox.ac.uk/spatial-thinker"> -->
-  <a href="https://hunarbatra.com/SpatialThinker">
-    <img src="https://img.shields.io/badge/🌐%20Project%20Page-blue.svg" alt="Project Page">
+  <a href="https://erfanshayegani.github.io/">
+    <img src="https://img.shields.io/badge/🌐%20Project%20Page-blue.svg" alt="Author Page">
   </a>
-  <a href="https://huggingface.co/collections/OX-PIXL/spatialthinker">
+  <!-- <a href="https://huggingface.co/collections/OX-PIXL/spatialthinker">
     <img src="https://img.shields.io/badge/🤗%20Models%20%26%20Dataset-orange.svg" alt="Hugging Face Models">
-  </a>
-  <a href="https://github.com/hunarbatra/SpatialThinker/stargazers"> 
+  </a> -->
+  <a href="https://github.com/erfanshayegani/Multimodal-Alignment-BlindSpots/stargazers"> 
     <img src="https://img.shields.io/github/stars/hunarbatra/SpatialThinker?style=social" alt="GitHub Stars">
   </a>
 </p>
@@ -201,7 +200,6 @@ python data_gen/generate_data.py generate_hf_data \
 
 
 ## Citation
-
 📚🤗 If you find this repository useful in your project, please consider giving a ⭐ and citing:
 
 ```bibtex
