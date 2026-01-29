@@ -11,8 +11,10 @@
 
 <p align="center">
 $${\color{red}\text{\textbf{Warning: This repo has harmful content!}}}$$
-[Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP)
 </p>
+
+[Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP)
+
 
 
 <p align="center">
