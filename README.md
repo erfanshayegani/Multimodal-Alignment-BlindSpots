@@ -6,14 +6,6 @@
 <a href="https://jadeleiyu.github.io/" target="_blank" style="text-decoration: none;">Lei Yu</a>,
 <a href="https://www.cs.ucr.edu/~nael/" target="_blank" style="text-decoration: none;">Nael Abu-Ghazaleh</a>, 
 <a href="https://yuedong.us/" target="_blank" style="text-decoration: none;">Yue Dong</a>
-</p>
-
-<h2 align="center">🔥 ICLR 2026</h2>
-
-<!-- $${\color{red}\text{\textbf{Warning: This repo contains harmful content!}}}$$
-[Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP) -->
-
-<p align="center">
   <a href="https://arxiv.org/abs/2504.03735">
     <img src="https://img.shields.io/badge/arXiv-2511.07403-b31b1b.svg" alt="arXiv">
   </a>
@@ -27,6 +19,28 @@
     <img src="https://img.shields.io/github/stars/erfanshayegani/Multimodal-Alignment-BlindSpots?style=social" alt="GitHub Stars">
   </a>
 </p>
+
+
+
+<!-- $${\color{red}\text{\textbf{Warning: This repo contains harmful content!}}}$$
+[Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP) -->
+
+<!-- <p align="center">
+  <a href="https://arxiv.org/abs/2504.03735">
+    <img src="https://img.shields.io/badge/arXiv-2511.07403-b31b1b.svg" alt="arXiv">
+  </a>
+  <!-- <a href="https://erfanshayegani.github.io/">
+    <img src="https://img.shields.io/badge/🌐%20Project%20Page-blue.svg" alt="Author Page">
+  </a> -->
+  <!-- <a href="https://huggingface.co/collections/OX-PIXL/spatialthinker">
+    <img src="https://img.shields.io/badge/🤗%20Models%20%26%20Dataset-orange.svg" alt="Hugging Face Models">
+  </a> -->
+  <a href="https://github.com/erfanshayegani/Multimodal-Alignment-BlindSpots/stargazers"> 
+    <img src="https://img.shields.io/github/stars/erfanshayegani/Multimodal-Alignment-BlindSpots?style=social" alt="GitHub Stars">
+  </a>
+</p> -->
+
+<h2 align="center">🔥 ICLR 2026</h2>
 
 ### 💡 Overview
 We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(i) fragility to minor structural perturbations*, and *(ii) user–assistant role alignment asymmetry*. Both induce harmful outputs without query-content manipulation and reveal deeper downstream implications (especially under recent trends in synthetic alignment data generation). We provide *causal insights* into the resulting representational shifts relative to refusal directions, and propose a post-training mitigation approach.
