@@ -43,6 +43,15 @@ We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(
 
 ---
 
+
+### ✨ Updates
+- [2026/03/16] ✅ Code is released! Feel free to play around and let us know if you have any questions!
+- [2026/01/28] 💻 Stay tuned for the Code and Results.
+- [2026/01/25] 🔥 The paper got accepted at **ICLR 2026**!
+- [2025/11/24] 🎉 Accepted at the Responsible Foundation Models Workshop@NeurIPS 2025.
+
+---
+
 ### 🗂️ Repository Structure & How to Use
 
 Our repository contains code and notebooks for reproducing all experiments from the paper. **Note:** All code is provided as Jupyter notebooks with placeholder API keys that should be replaced with your own credentials.
@@ -91,13 +100,6 @@ Explore complementary attack vectors beyond structural perturbations:
 #### **6. Visualization & Analysis** (`/Visualization`)
 - `FAPlot.ipynb`: Feature attribution and visualization plots
 - `generic vector visualization.ipynb`: Representational analysis and t-SNE/PCA visualizations
-
----
-
-### ✨ Updates
-- [2026/01/28] 💻 Stay tuned for the Code and Results.
-- [2026/01/25] 🔥 The paper got accepted at **ICLR 2026**!
-- [2025/11/24] 🎉 Accepted at the Responsible Foundation Models Workshop@NeurIPS 2025.
 
 ---
 
