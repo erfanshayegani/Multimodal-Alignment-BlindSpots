@@ -1,4 +1,4 @@
-# Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots
+# [🔥ICLR 2026] Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots
 <p align='center' style="text-align:center;font-size:1em;">
 <a href="https://erfanshayegani.github.io/" target="_blank" style="text-decoration: none;">Erfan Shayegani</a>, 
 <a href="https://shahariar-shibli.github.io/" target="_blank" style="text-decoration: none;">G M Shahariar</a>, 
@@ -28,8 +28,6 @@
     <img src="https://img.shields.io/github/stars/erfanshayegani/Multimodal-Alignment-BlindSpots?style=social" alt="GitHub Stars">
   </a>
 </p>
-
-<h3 align="center">🔥 ICLR 2026</h3>
 
 ---
 
