@@ -41,6 +41,56 @@ We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(
   <img src="assets/Cross-Role.png" width="40%" alt="Abstract_ICLR2026">
 </p>
 
+---
+
+### 🗂️ Repository Structure & How to Use
+
+Our repository contains code and notebooks for reproducing all experiments from the paper. **Note:** All code is provided as Jupyter notebooks with placeholder API keys that should be replaced with your own credentials.
+
+#### **1. Dataset** (`/dataset`)
+- **`advbench_instructions.json`** & **`alpaca_instructions.json`**: Harmful prompt collections for evaluation
+- **`xstest_prompts.csv`**: XS-test prompts for robustness evaluation
+- **`images/`**: Images used across experiments
+
+#### **2. Core Experiments: Inference** (`/Inference`)
+Start here to understand the main findings. Test models against structural perturbations (misplaced images and role swaps):
+
+- **`Image/`**: Experiments with image token repositioning
+  - `Firearms/`: Test with firearms images and harmful prompts
+  - `Flower/`: Test with flower images and harmful prompts
+  - Includes notebooks for **LLaVA**, **Phi**, and **Qwen** models
+  - As we have discussed in the paper, the image content does not have significant effects
+  
+- **`No Image/`**: Baseline experiments with text-only role swaps (no image manipulation)
+  - Compare cross-role and user-assistant role reversals
+  - Available for **LLaVA**, **Phi**, and **Qwen**
+
+#### **3. Alignment & Mitigation: SFT Training** (`/SFT Fresh`)
+Reproduce our proposed adversarial training approach:
+
+- **Datasets**: Pre-processed training data including:
+  - `alpaca_harmless_train.json`: Harmless instruction-following data
+  - `circuit_breakers_train.json`: Safety-focused training examples
+  - `harmbench_behaviors_text_all.csv`: Harmful behaviors for training
+  
+- **Per-Model Notebooks** (LLaVA, Phi, Qwen):
+  - `SFT all mix.ipynb`: SFT with mixed harmless + safety data
+  - `SFT based on C.ipynb`: SFT on one attack vector to see generalization
+  - `VQA Reward.ipynb`: Evaluation of normal capabilities with reward models
+
+#### **4. Additional Attack Methods** (`/Other Attacks`)
+Explore complementary attack vectors beyond structural perturbations:
+
+- **GCG Attack**: Gradient-based adversarial attacks (`gcg attack.ipynb`)
+- **Compositionality Checks**: Test robustness to compositional attacks
+- **All Other Attacks**: Comprehensive attack suite per model (LLaVA, Phi, Qwen)
+
+#### **5. Safety Tooling** (`/Llama Guard`)
+- `LlamaGuard.ipynb`: Safety classifier for filtering outputs
+
+#### **6. Visualization & Analysis** (`/Visualization`)
+- `FAPlot.ipynb`: Feature attribution and visualization plots
+- `generic vector visualization.ipynb`: Representational analysis and t-SNE/PCA visualizations
 
 ---
 
@@ -196,6 +246,9 @@ python data_gen/generate_data.py generate_hf_data \
 ```
 
 📖 **Full documentation**: [`data_gen/README.md`](data_gen/README.md) -->
+
+To provide a smooth experience with reproducing our results; we have put all our code into .IPYNB notebooks. There are some expired placeholder Token Access keys in the notebooks which you should replace with your own keys.
+
 ### 📬 Correspondence
 
 For questions or discussion, please contact: [Erfan Shayegani](https://erfanshayegani.github.io/): [sshay004@ucr.edu](mailto:sshay004@ucr.edu) and [G M Shahariar](https://shahariar-shibli.github.io/): [gshah010@ucr.edu](mailto:gshah010@ucr.edu)
