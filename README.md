@@ -261,12 +261,12 @@ For questions or discussion, please contact: [Erfan Shayegani](https://erfanshay
 📚🤗 If you find this repository useful in your project, please consider giving a ⭐ and citing:
 ```bibtex
 @inproceedings{
-    shayegani2026misaligned,
-    title={Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots},
-    author={Erfan Shayegani and G M Shahariar and Sara Abdali and Lei Yu and Nael Abu-Ghazaleh and Yue Dong},
-    booktitle={The Fourteenth International Conference on Learning Representations},
-    year={2026},
-    url={https://openreview.net/forum?id=HRkrWi3FWP}
+shayegani2026misaligned,
+title={Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots},
+author={Erfan Shayegani and G M Shahariar and Sara Abdali and Lei Yu and Nael Abu-Ghazaleh and Yue Dong},
+booktitle={The Fourteenth International Conference on Learning Representations},
+year={2026},
+url={https://openreview.net/forum?id=HRkrWi3FWP}
 }
 ```
 
