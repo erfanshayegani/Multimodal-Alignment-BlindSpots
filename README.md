@@ -200,6 +200,7 @@ python data_gen/generate_data.py generate_hf_data \
 
 For questions or discussion, please contact: [Erfan Shayegani](https://erfanshayegani.github.io/): [sshay004@ucr.edu](mailto:sshay004@ucr.edu) and [G M Shahariar](https://shahariar-shibli.github.io/): [gshah010@ucr.edu](mailto:gshah010@ucr.edu)
 
+---
 
 ### Citation
 📚🤗 If you find this repository useful in your project, please consider giving a ⭐ and citing:
