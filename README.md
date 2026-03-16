@@ -12,6 +12,9 @@
 [Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots](https://openreview.net/forum?id=HRkrWi3FWP) -->
 
 <p align="center">
+<a href="https://openreview.net/forum?id=HRkrWi3FWP">
+  <img src="https://img.shields.io/badge/OpenReview-Paper-8C1AFF.svg" alt="OpenReview">
+</a>
   <a href="https://arxiv.org/abs/2504.03735">
     <img src="https://img.shields.io/badge/arXiv-2511.07403-b31b1b.svg" alt="arXiv">
   </a>
