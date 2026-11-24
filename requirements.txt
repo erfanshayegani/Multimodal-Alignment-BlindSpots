@@ -1,0 +1,23 @@
+# Core (inference, activations, plots)
+torch>=2.1
+transformers>=4.49
+accelerate
+datasets
+huggingface_hub
+pillow
+numpy
+pandas
+scikit-learn
+matplotlib
+tqdm
+
+# SFT mitigation
+peft>=0.13
+trl>=0.15
+bitsandbytes
+wandb
+
+# Optional
+emoji        # VQA response cleaning
+nanogcg      # GCG baseline
+# flash-attn # faster attention for Qwen2-VL / Phi-3.5-V (falls back to sdpa if missing)

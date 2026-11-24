@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blindspots"
+version = "0.1.0"
+description = "Misaligned Roles, Misplaced Images: Structural Input Perturbations Expose Multimodal Alignment Blind Spots (ICLR 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.1",
+    "transformers>=4.49",
+    "accelerate",
+    "datasets",
+    "huggingface_hub",
+    "pillow",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+train = ["peft>=0.13", "trl>=0.15", "bitsandbytes", "wandb"]
+gcg = ["nanogcg"]
+vqa = ["emoji"]
+flash = ["flash-attn"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["blindspots*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -52,204 +52,126 @@ We expose two key alignment blindspots in Multimodal Language Models (MLLMs): *(
 
 ---
 
-### 🗂️ Repository Structure & How to Use
+### 🗂️ Repository Structure
 
-Our repository contains code and notebooks for reproducing all experiments from the paper. **Note:** All code is provided as Jupyter notebooks with placeholder API keys that should be replaced with your own credentials.
-
-#### **1. Dataset** (`/dataset`)
-- **`advbench_instructions.json`** & **`alpaca_instructions.json`**: Harmful prompt collections for evaluation
-- **`xstest_prompts.csv`**: XS-test prompts for robustness evaluation
-- **`images/`**: Images used across experiments
-
-#### **2. Core Experiments: Inference** (`/Inference`)
-Start here to understand the main findings. Test models against structural perturbations (misplaced images and role swaps):
-
-- **`Image/`**: Experiments with image token repositioning
-  - `Firearms/`: Test with firearms images and harmful prompts
-  - `Flower/`: Test with flower images and harmful prompts
-  - Includes notebooks for **LLaVA**, **Phi**, and **Qwen** models
-  - As we have discussed in the paper, the image content does not have significant effects
-  
-- **`No Image/`**: Baseline experiments with text-only role swaps (no image manipulation)
-  - Compare cross-role and user-assistant role reversals
-  - Available for **LLaVA**, **Phi**, and **Qwen**
-
-#### **3. Alignment & Mitigation: SFT Training** (`/SFT Fresh`)
-Reproduce our proposed adversarial training approach:
-
-- **Datasets**: Pre-processed training data including:
-  - `alpaca_harmless_train.json`: Harmless instruction-following data
-  - `circuit_breakers_train.json`: Safety-focused training examples
-  - `harmbench_behaviors_text_all.csv`: Harmful behaviors for training
-  
-- **Per-Model Notebooks** (LLaVA, Phi, Qwen):
-  - `SFT all mix.ipynb`: SFT with mixed harmless + safety data
-  - `SFT based on C.ipynb`: SFT on one attack vector to see generalization
-  - `VQA Reward.ipynb`: Evaluation of normal capabilities with reward models
-
-#### **4. Additional Attack Methods** (`/Other Attacks`)
-Explore complementary attack vectors beyond structural perturbations:
-
-- **GCG Attack**: Gradient-based adversarial attacks (`gcg attack.ipynb`)
-- **Compositionality Checks**: Test robustness to compositional attacks
-- **All Other Attacks**: Comprehensive attack suite per model (LLaVA, Phi, Qwen)
-
-#### **5. Safety Tooling** (`/Llama Guard`)
-- `LlamaGuard.ipynb`: Safety classifier for filtering outputs
-
-#### **6. Visualization & Analysis** (`/Visualization`)
-- `FAPlot.ipynb`: Feature attribution and visualization plots
-- `generic vector visualization.ipynb`: Representational analysis and t-SNE/PCA visualizations
-
----
-
-<!-- ### 🧩 Requirements
-
-- Python 3.9+
-- `transformers >= 4.49.0`
-- `flash-attn >= 2.4.3`
-- `vllm >= 0.7.3` (0.8.0 recommended)
-
----
+```
+├── blindspots/              # Python package (library code)
+│   ├── models.py            #   LLaVA / Qwen2-VL / Phi-3.5-V adapters: role swap, image placement, generation, activations
+│   ├── metrics.py           #   prefix-based refusal / jailbreak scoring
+│   ├── data.py              #   AdvBench, Alpaca, HarmBench, XSTest, SFT data loaders
+│   ├── attacks.py           #   text jailbreak templates (AIM, prefix injection, ...)
+│   ├── vectors.py           #   refusal / attack directions, layer-wise cosine & angles
+│   ├── sft.py               #   adversarial SFT: data rendering, response-only collator, LoRA/SFT configs
+│   └── plotting.py          #   layer-wise PCA and similarity figures
+├── scripts/                 # Runnable experiments (one per notebook family, see table below)
+├── tests/                   # pytest: prompt formats, SFT label masking, metrics
+├── dataset/                 # AdvBench, Alpaca, HarmBench, XSTest, SFT training data, images
+├── notebooks/               # The original research notebooks, kept unchanged for reference
+└── assets/
+```
 
 ### ⚙️ Installation
 
 ```bash
-pip install -e .
+git clone https://github.com/erfanshayegani/Multimodal-Alignment-BlindSpots.git
+cd Multimodal-Alignment-BlindSpots
+pip install -e ".[train,vqa,gcg,dev]"     # or: pip install -r requirements.txt
+# optional, faster attention for Qwen2-VL / Phi-3.5-V:  pip install flash-attn --no-build-isolation
+
+export HF_TOKEN=...          # only needed for gated models (e.g. Llama Guard 3)
 ```
 
----
+Credentials are read from the environment only; nothing is hard-coded.
 
-### 🚀 Training
+### 🧩 Structural perturbations
 
-#### Train **SpatialThinker Models** with STVQA-7K, Dense Spatial Rewards + GRPO
+Every experiment is defined by a **setting** = *image-token position* × *role swap*:
 
+| setting name | image position | roles | paper name |
+|---|---|---|---|
+| `no_img_no_swap` | – | normal | baseline |
+| `no_img_cross_role` | – | swapped | **A** |
+| `img_in_no_swap` / `img_in_cross_role` | inside user turn (default) | normal / swapped | img pos |
+| `img_end_no_swap` / `img_end_cross_role` | end of user turn | normal / swapped | **newB** / **newC** |
+| `img_outside_no_swap` / `img_outside_cross_role` | after assistant header | normal / swapped | **B** / **C** |
+
+The aliases `A`, `B`, `C`, `newB`, `newC` are accepted wherever `--settings` is.
+
+### 🚀 Usage
+
+All scripts take `--model {llava,qwen,phi}` and write to `results/` by default. Run any script with `-h` for all options.
+
+**1. Core experiment: structural perturbations** (`notebooks/Inference`)
 ```bash
-bash scripts/spatialthinker_3b_grpo.sh
+python scripts/run_inference.py --model qwen --datasets advbench                 # firearms image, all 8 settings
+python scripts/run_inference.py --model qwen --image dataset/flower.jpg --tag flower
+python scripts/run_inference.py --model qwen --settings no_img_no_swap A --system-prompt
 ```
+
+**2. Representation analysis** (activation sections of `notebooks/Other Attacks`, `notebooks/Visualization`)
 ```bash
-bash scripts/spatialthinker_7b_grpo.sh
+python scripts/extract_vectors.py --model qwen --responses-dir results/inference/qwen/advbench --save-activations
+python scripts/plot_similarity.py results/vectors/qwen/advbench --output figures/qwen_cosine_refusal.pdf
+python scripts/plot_pca.py results/vectors/qwen/advbench/activations --output figures/qwen_pca.pdf
+python scripts/plot_pca.py results/vectors/qwen/advbench/activations --layer 15 --output figures/qwen_layer16.pdf
 ```
 
-#### Train **Baseline Models** (Vanilla GRPO) with STVQA-7K
-
+**3. Other attacks and compositionality** (`notebooks/Other Attacks`)
 ```bash
-bash scripts/qwen_2_5_3b_stvqa_vanilla_grpo.sh
+python scripts/run_gcg.py optimize --output results/gcg/vicuna_advbench_gcg.json      # nanoGCG on Vicuna-7B
+python scripts/run_gcg.py evaluate --llm qwen2 --prompts results/gcg/vicuna_advbench_gcg.json
+python scripts/run_other_attacks.py --model qwen --dataset advbench                   # + --attacks gcg --gcg-file ...
+python scripts/compositionality.py --model qwen --attack-dir results/other_attacks/qwen/advbench \
+    --refusal results/vectors/qwen/advbench/refusal.npy
 ```
+
+**4. Mitigation: adversarial SFT** (`notebooks/SFT Fresh`)
 ```bash
-bash scripts/qwen_2_5_7b_stvqa_vanilla_grpo.sh
+# stage 1: text-only role swap on harmful data
+python scripts/train_sft.py --model qwen --recipe stage1 --output-dir checkpoints/qwen_stage1
+# stage 2: all six image settings, random images from dataset/images
+python scripts/train_sft.py --model qwen --recipe mix --init-from checkpoints/qwen_stage1 \
+    --image-dir dataset/images --output-dir checkpoints/qwen_mix
+# generalization: train on one setting only
+python scripts/train_sft.py --model qwen --settings newC --image-dir dataset/images --output-dir checkpoints/qwen_newC
+
+# evaluate: safety on harmful sets, over-refusal on harmless sets, utility on VQA
+python scripts/run_inference.py --model qwen --adapter checkpoints/qwen_mix --datasets advbench harmbench alpaca xstest --tag sft_mix
+python scripts/vqa_eval.py --model qwen --adapter checkpoints/qwen_mix --reward-model openassistant
 ```
 
----
-
-### 🧠 Merge Checkpoints to Hugging Face Format
+**5. Llama Guard judging** (`notebooks/Llama Guard`)
 ```bash
-python3 scripts/model_merger.py --local_dir path_to_your_last_actor_checkpoint
-```
----
-
-### 🧪 Evaluation
-
-To evaluate **SpatialThinker** or baseline models across spatial reasoning benchmarks, use the provided `evaluation/evals.py` script.
-
-#### Basic Command Structure
-```bash
-python3 evaluation/evals.py \
-    --dataset <dataset_name> \
-    --template <prompt_template> \ # e.g. `reasoning`, `no_reasoning`, `spatial_thinker`  
-    --model_path <model_or_checkpoint> \
-    --cuda <gpu_id> \
-    --batch_size <num_samples_per_step> \
-    [--provider <inference_backend>] \ 
-    [--processor_name <tokenizer_or_processor>] \
-    [--custom_filename <output_name>]
+python scripts/llama_guard.py results/sft_mix/qwen/harmbench/*.json
 ```
 
-#### ⚙️ Example: Evaluate Across Multiple Benchmarks
+**Re-scoring** any results file: `python scripts/evaluate_refusal.py results/inference/qwen/advbench/*.json`
 
-```bash
-python3 evaluation/evals.py \
-    --dataset blink-spatial \
-    --template spatial_thinker \
-    --model_path OX-PIXL/SpatialThinker-3B \
-    --cuda 0 \
-    --batch_size 4
-```
-```bash
-python3 evaluation/evals.py \
-    --dataset spatialbench \
-    --template spatial_thinker \
-    --model_path OX-PIXL/SpatialThinker-3B \
-    --cuda 0 \
-    --batch_size 2
-```
+**Tests:** `pytest` (downloads the three processors, no model weights).
 
-#### 📊 Example: Evaluate Using an API Provider (OpenAI / Anthropic)
+### 📓 Notebooks → scripts
 
-```bash
-python3 evaluation/evals.py \
-    --dataset stvqa \
-    --template reasoning \
-    --model_path gpt-4o-2024-05-13 \
-    --provider openai \
-    --batch_size 1
-```
-```bash
-python3 evaluation/evals.py \
-    --dataset stvqa \
-    --template reasoning \
-    --model_path claude-3-5-sonnet \
-    --provider anthropic \
-    --batch_size 1
-```
+| notebook (in `notebooks/`) | script |
+|---|---|
+| `Inference/{No Image,Image/Firearms,Image/Flower}/*_experiment.ipynb` | `run_inference.py` |
+| `Other Attacks/<MODEL>/all-other-attacks.ipynb` (generation) | `run_other_attacks.py` |
+| `Other Attacks/<MODEL>/all-other-attacks.ipynb` (activations) | `extract_vectors.py` |
+| `Other Attacks/<MODEL>/compositionality_check.ipynb` | `compositionality.py` |
+| `Other Attacks/gcg attack.ipynb` | `run_gcg.py` |
+| `SFT Fresh/<MODEL>/SFT *.ipynb` (training) | `train_sft.py` |
+| `SFT Fresh/<MODEL>/SFT *.ipynb` (testing) | `run_inference.py --adapter` |
+| `SFT Fresh/<MODEL>/VQA Reward*.ipynb` | `vqa_eval.py` |
+| `Llama Guard/LlamaGuard.ipynb` | `llama_guard.py` |
+| `Visualization/FAPlot.ipynb` | `plot_pca.py` |
+| `Visualization/generic vector visualization.ipynb` | `plot_similarity.py` |
 
-#### Supported Evaluation Datasets
-`cv-bench`, `cv-bench-2D`, `cv-bench-3D`, `blink-spatial`, `blink-depth`, `blink-object`,  
-`blink-counting`, `blink-multi-view`, `blink-jigsaw`, `realworld_qa`, `spatialbench`, `mmvp`, `3dsrbench`,
-`lego`, `spatialreasoner`, `robospatial`, `robospatial_rgb`, `stvqa`, `hallusionbench`.
+The notebooks contain absolute paths from our servers; the scripts are the recommended way to reproduce results.
 
-
-### ✅ TODOs
-
-- [x] Release Training Code  
-- [x] Release Evaluation Code  
-- [x] Release Model Checkpoints  
-- [x] Release STVQA-7K Training Dataset  
-- [x] Release STVQA-7K Data Generation Pipeline
-
----
-
-### 🗂️ STVQA Data Generation Pipeline
-
-Generate your own spatial VQA datasets using our data synthesis pipeline. The pipeline uses Claude Sonnet 4 for question generation and GPT-4o for consistency validation.
-
-**Quick Start:**
-```bash
-# Step 1: Generate raw QA pairs (56K full, or 12K for cost savings)
-python data_gen/generate_data.py preprocess_data --data_cap=12000
-
-# Step 2: Balance + Filter (50% relations, top-rated per category)
-python data_gen/generate_data.py generate_hf_data \
-    --input_file="data/spatialthinker_vqa_train.csv" \
-    --target_samples=10000 \
-    --relation_percent=50 \
-    --upload_to_hf=False
-
-# Step 3: Validate with GPT-4o (~75% pass rate)
-python data_gen/generate_data.py validate_with_gpt4o \
-    --input_file="data_train.csv" \
-    --output_file="data/spatialthinker_vqa_validated.csv"
-
-# Step 4: Upload final dataset to HuggingFace
-python data_gen/generate_data.py generate_hf_data \
-    --input_file="data/spatialthinker_vqa_validated.csv" \
-    --target_repo="your-username/spatialthinker_vqa" \
-    --upload_to_hf=True
-```
-
-📖 **Full documentation**: [`data_gen/README.md`](data_gen/README.md) -->
-
-To provide a smooth experience with reproducing our results; we have put all our code into .IPYNB notebooks. There are some expired placeholder Token Access keys in the notebooks which you should replace with your own keys.
+**Implementation notes**
+- Prompts for all three models are built by the adapters in `blindspots/models.py`; `tests/test_prompts.py` checks them against reference string transformations.
+- Results files store the raw `instruction` (and `original` for wrapped attacks) next to the formatted `prompt`.
+- Phi-3.5-V SFT matches role headers on the bare special tokens, since `"<|assistant|>\n"` tokenizes to an unknown token; `tests/test_sft_collator.py` checks that only the response is supervised.
+- VQA: `Graphcore/vqa` is no longer on the Hugging Face Hub, so `vqa_eval.py` uses `lmms-lab/VQAv2`.
 
 ### 📬 Correspondence
 

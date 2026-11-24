@@ -1,0 +1,19 @@
+# Outputs
+results/
+checkpoints/
+figures/
+wandb/
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
